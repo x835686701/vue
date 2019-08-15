@@ -1,0 +1,52 @@
+body{
+    background: url("../images/bg.png") no-repeat;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-size: 100%;
+}
+#main{
+   text-align: center;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    margin-right: -200px;
+    margin-top: -160px;
+}
+#main h2{
+    color: #9f6c35;
+}
+#dl{
+    padding: 5px;
+    border: 2px solid #fdd68b;
+    color: #ffec8c;
+    height: 200px;
+    width: 400px;
+    margin: auto;
+    background: url("../images/cont5-bg2.jpg");
+}
+#dl input{
+    margin-top: 25px;
+    border: 1px solid #dd9b54;
+    background: #ffefd5;
+    font-size: 14px;
+    color: #9f6c35;
+    width: 254px;
+    height: 35px;
+    display: inline-block;
+}
+
+.button{
+    cursor: pointer;
+    line-height: 1;
+    margin-top: 20px;
+    font-weight: 500;
+    padding: 12px 20px;
+    font-size: 14px;
+    border-radius: 4px;
+    background: #9f6c35;
+    border: 1px solid #dd9b54;
+    color: #ffefd5;
+}

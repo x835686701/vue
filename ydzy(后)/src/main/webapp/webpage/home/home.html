@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/vue-resource.min.js"></script>
+    <link rel="stylesheet" href="../../css/home.css">
+
+    <!--element组件-->
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../../assembly/Element/index.css">
+    <!-- 引入组件库 -->
+    <script src="../../assembly/Element/index.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="main">
+            <a class="herobutton" href="javascript:;vue.showlist('hero')">
+                <span>英雄资料</span>
+            </a>
+
+            <a class="herobutton" href="javascript:;vue.showlist('equipment')">
+                <span>装备资料</span>
+            </a>
+        </div>
+
+        <!--  英雄资料list-->
+        <div class="dia checkmore" id="herolist" v-show="herolistshow">
+            <div class="dia-con">
+                <div class="p-wrap">
+                    <div class="operation">
+                        <button class="opbutton" @click="addHero">录入</button>
+                        <div class="div-search">
+                            <input type="text" class="search" placeholder="搜索英雄名称">
+                            <a href="javascript:search();" class="btn-search" title="搜索"><i class="icon-search"></i></a>
+                        </div>
+
+                        <div class="herolist">
+                            <el-table :data="heroTableData" height="100%" border style="width: 100%">
+
+                                <el-table-column prop="name" label="英雄名字" width="180"></el-table-column>
+
+                                <el-table-column prop="occupation" label="职业" width="180"></el-table-column>
+
+                                <el-table-column prop="race" label="种族"></el-table-column>
+
+                                <el-table-column prop="price" label="价格"></el-table-column>
+
+                                <el-table-column prop="skill" label="技能"></el-table-column>
+
+                                <el-table-column label="操作">
+                                    <template slot-scope="scope">
+                                        <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                                        <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                                    </template>
+                                </el-table-column>
+                            </el-table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <a class="dia-close" href="javascript:vue.closelist('hero')" title="关闭"></a>
+        </div>
+
+        <!--  装备资料list-->
+        <div class="dia checkmore" id="equipmentlist" v-show="equipmentlistshow">
+            <div class="dia-con">
+                <div class="p-wrap">
+                    <div class="operation">
+                        <button class="opbutton">录入</button>
+                        <div class="div-search">
+                            <input type="text" class="search" placeholder="搜索装备名称">
+                            <a href="javascript:search();" class="btn-search" title="搜索"><i class="icon-search"></i></a>
+                        </div>
+
+                        <div class="equipmentlist">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="dia-close" href="javascript:vue.closelist('equipment')" title="关闭"></a>
+        </div>
+
+
+        <el-dialog :title="title" :visible.sync="heroFormVisible">
+            <el-form :model="heroform">
+                <el-form-item label="英雄图标" :label-width="formLabelWidth">
+                    <el-upload
+                            class="avatar-uploader"
+                            :show-file-list="false"
+                            action="/heroController/upload?path=hero"
+                            :on-success="handleAvatarSuccess"
+                            accept="image/jpeg,image/jpg,image/png"
+                            >
+                        <img v-if="heroform.heroimg" :src="heroform.heroimg" class="avatar">
+                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                    </el-upload>
+                </el-form-item>
+
+                <el-form-item label="英雄名称" :label-width="formLabelWidth">
+                    <el-input v-model="heroform.name" autocomplete="off"></el-input>
+                </el-form-item>
+
+                <el-form-item label="职业" :label-width="formLabelWidth">
+                    <el-select v-model="heroform.occupation" placeholder="请选择英雄职业">
+                        <el-option label="法师" value="法师"></el-option>
+                        <el-option label="刺客" value="刺客"></el-option>
+                        <el-option label="剑士" value="剑士"></el-option>
+                        <el-option label="斗士" value="斗士"></el-option>
+                        <el-option label="元素使" value="元素使"></el-option>
+                        <el-option label="护卫" value="护卫"></el-option>
+                        <el-option label="枪手" value="枪手"></el-option>
+                        <el-option label="骑士" value="骑士"></el-option>
+                        <el-option label="游侠" value="游侠"></el-option>
+                        <el-option label="换形师" value="换形师"></el-option>
+                    </el-select>
+                </el-form-item>
+
+                <el-form-item label="种族" :label-width="formLabelWidth">
+                    <el-select v-model="heroform.race" placeholder="请选择英雄种族">
+                        <el-option label="恶魔" value="恶魔"></el-option>
+                        <el-option label="龙" value="龙"></el-option>
+                        <el-option label="浪人" value="浪人"></el-option>
+                        <el-option label="极地" value="极地"></el-option>
+                        <el-option label="帝国" value="帝国"></el-option>
+                        <el-option label="忍者" value="忍者"></el-option>
+                        <el-option label="贵族" value="贵族"></el-option>
+                        <el-option label="暗影" value="暗影"></el-option>
+                        <el-option label="海盗" value="海盗"></el-option>
+                        <el-option label="机器人" value="机器人"></el-option>
+                        <el-option label="虚空" value="虚空"></el-option>
+                        <el-option label="狂野" value="狂野"></el-option>
+                        <el-option label="约德尔人" value="约德尔人"></el-option>
+                    </el-select>
+                </el-form-item>
+
+                <el-form-item label="价格" :label-width="formLabelWidth">
+                    <el-select v-model="heroform.price" placeholder="请选择英雄价格">
+                        <el-option label="1金币" value="1金币"></el-option>
+                        <el-option label="2金币" value="2金币"></el-option>
+                        <el-option label="3金币" value="3金币"></el-option>
+                        <el-option label="4金币" value="4金币"></el-option>
+                        <el-option label="5金币" value="5金币"></el-option>
+                    </el-select>
+                </el-form-item>
+
+                <el-form-item label="技能" :label-width="formLabelWidth">
+                    <el-input v-model="heroform.skill" autocomplete="off"></el-input>
+                </el-form-item>
+
+                <el-form-item label="技能图片" :label-width="formLabelWidth">
+                    <el-upload
+                            class="avatar-uploader"
+                            :show-file-list="false"
+                            action="/heroController/upload?path=skill"
+                            :on-success="handleAvatarSuccess2"
+                            accept="image/jpeg,image/jpg,image/png"
+                    >
+                        <img v-if="heroform.skillimg" :src="heroform.skillimg" class="avatar">
+                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                    </el-upload>
+                </el-form-item>
+
+                <el-form-item label="技能描述" :label-width="formLabelWidth">
+                    <el-input v-model="heroform.skilldescribe" autocomplete="off"></el-input>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="heroClose">取 消</el-button>
+                <el-button type="primary" @click="heroSubmit">确 定</el-button>
+            </div>
+        </el-dialog>
+
+    </div>
+
+    <script src="../../js/home.js"></script>
+</body>
+</html>

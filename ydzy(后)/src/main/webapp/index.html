@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理</title>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/vue-resource.min.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+
+    <!--element组件-->
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="assembly/Element/index.css">
+    <!-- 引入组件库 -->
+    <script src="assembly/Element/index.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="main">
+            <h2>后台管理登录</h2>
+            <div id="dl">
+                用户名：<input type="text" v-model="username">
+                <br>
+                密<span style="margin-left: 1em"></span>码：<input type="password" v-model="password" @keyup.enter="login">
+                <br>
+                <button class="button" @Click="login">登录</button>
+            </div>
+        </div>
+    </div>
+    <script>
+
+
+        var vue = new Vue({
+            el:'#app',
+            data:{
+                username:'',
+                password:''
+            },
+            methods:{
+                login:function () {
+                    this.$http.post('loginController/loginon',{username:this.username,password:this.password},{emulateJSON:true}).then(function(res){
+                        this.$message.error(res.bodyText);
+                        if (res.bodyText == "成功") window.location.href="loginController/jump";
+                    },function(res){
+                        this.$message.error(res.bodyText);
+                        //失败
+                    });
+                }
+            }
+        })
+    </script>
+</body>
+</html>

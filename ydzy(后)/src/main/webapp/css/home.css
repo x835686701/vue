@@ -1,0 +1,222 @@
+body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background: url("../images/homebg.png") no-repeat;
+    background-size: cover;
+}
+a{
+    text-decoration: none;
+}
+
+.herobutton{
+    display: inline-block;
+    width: 305px;
+    height: 88px;
+    line-height: 88px;
+    color: #ffffff;
+    background: url(../images/main-btn-b.png);
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration:none;
+}
+.herobutton span{
+    font-family: '\5FAE\8F6F\96C5\9ED1';
+    width: 305px;
+    height: 88px;
+    font: 12px/1.5 tahoma,'\5b8b\4f53',sans-serif;
+    text-align: center;
+    cursor: pointer;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 88px;
+    color: #ffffff;
+    position: relative;
+    z-index: 2;
+    text-decoration:none;
+}
+.main{
+    position: absolute;
+    top: 30%;
+    width: 100%;
+    text-align: center;
+}
+@media screen and (max-width: 1400px){
+    #herolist,#equipmentlist{
+        display: block;
+        visibility: visible;
+        position: absolute;
+        left: 50%;
+        top: 50px;
+        margin-top: 0px;
+        margin-left: -502px;
+    }
+}
+
+@media screen and (min-width: 1450px){
+    #herolist,#equipmentlist{
+        display: block;
+        visibility: visible;
+        position: absolute;
+        left: 50%;
+        top: 100px;
+        margin-top: 0px;
+        margin-left: -850px;
+    }
+}
+
+
+/*弹窗*/
+@media screen and (max-width: 1400px){
+    .checkmore .dia-con {
+        width: 1000px;
+        background: #3a2b5f;
+        border: 2px solid #6865cd;
+    }
+    .checkmore .p-wrap {
+        width: 1000px;
+        margin: 0 auto;
+        font-size: 16px;
+        color: #bdb6f1;
+        min-height: 400px;
+    }
+    .herolist,.equipmentlist{
+        max-height: 331px;
+    }
+    .el-table{
+        max-height: 331px;
+        min-height: 331px;
+    }
+}
+
+@media screen and (min-width: 1450px){
+    .herolist,.equipmentlist{
+        max-height: 581px;
+    }
+    .el-table{
+        max-height: 581px;
+        min-height: 581px;
+    }
+    .checkmore .dia-con {
+        width: 1700px;
+        background: #3a2b5f;
+        border: 2px solid #6865cd;
+    }
+    .checkmore .p-wrap {
+        width: 1700px;
+        margin: 0 auto;
+        font-size: 16px;
+        color: #bdb6f1;
+        min-height: 650px;
+    }
+}
+.checkmore .p-wrap p {
+    margin: 10px 0;
+    text-align: justify;
+}
+
+.dia .dia-close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateX(100%);
+    transition: filter .3s,border .3s,color .3s;
+    display: inline-block;
+}
+.dia-close {
+    cursor: pointer;
+    background-position: -2218px -822px;
+    width: 48px;
+    height: 84px;
+    background-image: url(../images/sprite-img.png);
+    background-size: 2402px 2139px;
+    background-repeat: no-repeat;
+}
+
+.operation{
+    height: 75px;
+    width: 100%;
+    background: #ece2e0;
+}
+.opbutton{
+    background: url("../images/btn01.png") no-repeat;
+    background-size: 100%;
+    width: 125px;
+    height: 60px;
+    border: 0;
+    margin-top: 4px;
+    margin-bottom: 5px;
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.search{
+    text-indent: 35px;
+    vertical-align: top;
+    display: inline-block;
+    border: 1px solid #dd9b54;
+    border-right: none;
+    background: #ffefd5;
+    font-size: 14px;
+    color: #9f6c35;
+    width: 254px;
+    height: 35px;
+}
+.btn-search{
+    width: 39px;
+    height: 37px;
+    border: 1px solid #dd9b54;
+    border-left: none;
+    line-height: 35px;
+    vertical-align: top;
+    position: relative;
+    background: #9f6c35;
+    text-align: center;
+}
+.icon-search{
+    vertical-align: middle;
+    background-image: url(../images/icon-search.png);
+    width: 17px;
+    height: 16px;
+    background-position: 0 0;
+    background-size: 100%;
+    display: inline-block;
+    background-repeat: no-repeat;
+    line-height: 35px;
+    font-size: 0;
+}
+.div-search{
+    float: right;
+    display: flex;
+    margin-right: 30px;
+    margin-top: 18px;
+}
+
+/*上传组件*/
+.avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+}
+.avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 100px;
+    height: 100px;
+    line-height: 100px!important;
+    text-align: center;
+}
+.avatar {
+    width: 100px;
+    height: 100px;
+    display: block;
+}
